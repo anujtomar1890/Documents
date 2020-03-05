@@ -1,0 +1,52 @@
+
+Open Ubuntu Terminal:
+
+apt-get update
+apt install openjdk-8-jdk openjdk-8-jre
+
+Set Java Variable in .profile
+root@anuj-vm-test-2:/home/anujtomar1890# find /usr/lib/jvm/java-1.8.0-openjdk-amd64 | head -3
+/usr/lib/jvm/java-1.8.0-openjdk-amd64
+
+root@anuj-vm-test-2:/home/anujtomar1890# vi .profile
+
+JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+PATH="$HOME/bin:$JAVA_HOME:$HOME/.local/bin:$PATH"
+
+Saved
+
+Check the variable
+root@anuj-vm-test-2:/home/anujtomar1890# . ./.profile 
+root@anuj-vm-test-2:/home/anujtomar1890# echo $JAVA_HOME
+/usr/lib/jvm/java-1.8.0-openjdk-amd64
+
+Install nginx:
+sudo apt-get install nginx
+
+Install Jenkins:
+wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt-get update
+sudo apt-get install jenkins
+
+Login to Jenkins url on port 8080
+http://34.97.212.20:8080/
+
+Login with default password:
+
+root@anuj-vm-test-2:/home/anujtomar1890# cat /var/lib/jenkins/secrets/initialAdminPassword
+fa177d5880374f4d97ce64b12bd730a9
+
+Next screen will ask for install the defaul plugin: Yes
+
+Users:
+admin
+admin
+
+tester
+admin
+
+anujtomar1890
+same as gmail
+
+
