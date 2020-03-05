@@ -1,0 +1,7 @@
+anujtomar1890@web-server:~$ cat /script.py 
+import subprocess as sp
+import socket
+host = socket.gethostname()
+ip = socket.gethostbyname(host)
+command = ''' echo '<!doctype html><html><body><h1>Hello World! my IP address is %s</h1></body></html>' | sudo tee /var/www/html/index.html''' %(ip)
+sp.call(command, shell=True)
