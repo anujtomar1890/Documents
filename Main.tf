@@ -1,43 +1,25 @@
 
-provider "google" {
-  credentials = file("account.json")
-  project     = "shivaamiacadmey"
-  region      = "asia-northeast2"
+provider "aws" {
+  profile  = "Anuj"
+  region  = "ap-south-1"
 }
 
-resource "google_compute_instance" "default" {
-  name         = "test"
-  machine_type = "n1-standard-1"
-  zone         = "asia-northeast2-a"
-
-  tags = ["foo", "bar"]
-
-  boot_disk {
-    initialize_params {
-      image = "ubuntu-os-cloud/ubuntu-1604-lts"
-    }
-  }
-  network_interface {
-    network = "default"
+resource "aws_s3_bucket" "s3_test" {
+  bucket="shivaamiacademy-1111122222"
+  acl="private"
 }
+
+resource "aws_instance" "anuj-VM1" {
+    ami= "ami-0620d12a9cf777c87"
+    instance_type= "t2.micro"
+
+tags = {
+    Name="AnujVM-1" }
+  depends_on= [aws_s3_bucket.s3_test]
 }
- # // Local SSD disk
- # scratch_disk {
- #   interface = "SCSI"
- # }
 
-
- #   access_config {
- #     // Ephemeral IP
- #   }
- # }
-
- # metadata = {
- #   foo = "bar"
- # }
-
- # metadata_startup_script = "echo hi > /test.txt"
-
- # service_account {
- #   scopes = ["userinfo-email", "compute-ro", "storage-ro"]
- # }
+resource "aws_eip" "ip" {
+  vpc=true
+  instance=aws_instance.anuj-VM1.id
+  
+}
